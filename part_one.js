@@ -1,3 +1,6 @@
+// Peter Fröberg, pefr7147@student.su.se
+// Douglas Hammarstam, doha6991@student.su.se
+
 var myObject = {
     prototypes: []
 }
@@ -17,8 +20,8 @@ myObject.call = function (funcName, parameters) {
         return this[funcName](parameters);
     }
     if (this.prototypes != null) {
-        for (p of this.prototypes) {
-            var parentresult = p.call(funcName, parameters);
+        for (parentresult of this.prototypes) {
+            var parentresult = parentresult.call(funcName, parameters);
             if (parentresult) {
                 return parentresult;
             }
@@ -26,34 +29,6 @@ myObject.call = function (funcName, parameters) {
     }return null;
 }
 
-
-//tester
-
-//Egna Tester ***************
-//Skapar objekt
-/*o1 = myObject.create(null)
-o1.func = function (parameters) {
-    return "fun funktionen o1. med paramters " + parameters
-}
-
-o2 = myObject.create([o1])
-o2.func = function (paraneters){
-    return "Funktion 02. med paramters " + parameters
-}
-
-o3 = myObject.create([o2])
-
-o4 = myObject.create((o1))
-o4.func = function(parameters){
-    return "Funktion 03. med paramters " + parameters
-}
-
-
-console.log("Roppar på o1 func")
-o1.call("func", ["Parameters"])
-
-console.log("Roppar på 03 func")
-o3.call("func", ["Parameters"])*/
 
 
 //Kurstester *****************
