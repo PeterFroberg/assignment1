@@ -1,3 +1,6 @@
+// Peter Fröberg, pefr7147@student.su.se
+// Douglas Hammarstam, doha6991@student.su.se
+
 function createClass(name, superclassList) {
     let obj = {
         classname: name,
