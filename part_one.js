@@ -12,16 +12,16 @@ myObject.create = function (prototypeList) {
     return newObject;
 }
 
-myObject.call = function (funcName, parameters) {
+myObject.call = function (funcName, args) {
     console.log("In call function");
 
     if (typeof this[funcName] === "function") {
         console.log("In if statment");
-        return this[funcName](parameters);
+        return this[funcName](args);
     }
     if (this.prototypes != null) {
         for (parent of this.prototypes) {
-            var parentresult = parent.call(funcName, parameters);
+            var parentresult = parent.call(funcName, args);
             if (parentresult) {
                 return parentresult;
             }
@@ -35,7 +35,7 @@ myObject.addPrototype = function(parameter) {
     if(!parameter.checkProto(this)) {
         this.prototypes.push(parameter);
     }else {
-        throw "Circular referencing detected, prototype not added"
+        //throw "Circular referencing detected, prototype not added"
         console.log("Exists");
     }
 }
@@ -56,11 +56,11 @@ myObject.checkProto = function (proto) {
 
 
 //Egna tester
-var obj0 = myObject.create(null);
-var obj1 = myObject.create([obj0]);
-obj0.addPrototype(obj1);
+//var obj0 = myObject.create(null);
+//var obj1 = myObject.create([obj0]);
+//obj0.addPrototype(obj1);
 
-/*//Kurstester *****************
+//Kurstester *****************
 var obj0 = myObject.create(null);
 obj0.func = function (arg) {return "func0: " + arg;};
 var obj1 = myObject.create([obj0]);
@@ -84,4 +84,4 @@ console.log("should print ’func0: hello’ ->", result);
 obj0 = myObject.create(null);
 obj0.func = function (arg) {return "func0: " + arg;};
 result = obj0.call("func", ["hello"]);
-console.log("should print ’func0: hello’ ->", result);*/
+console.log("should print ’func0: hello’ ->", result);
