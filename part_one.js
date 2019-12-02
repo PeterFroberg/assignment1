@@ -30,25 +30,25 @@ myObject.call = function (funcName, args) {
     return null;
 }
 
-myObject.addPrototype = function(parameter) {
+myObject.addPrototype = function(args) {
 
-    if(!parameter.checkProto(this)) {
-        this.prototypes.push(parameter);
+    if(!args.checkProto(this)) {
+        this.prototypes.push(args);
     }else {
-        //throw "Circular referencing detected, prototype not added"
+        throw "Circular referencing detected, prototype not added"
         console.log("Exists");
     }
 }
 
-myObject.checkProto = function (proto) {
+myObject.checkProto = function (args) {
     var exists = false;
 
     if(this.prototypes != null) {
-        if (this.prototypes.includes(proto)) {
+        if (this.prototypes.includes(args)) {
             return true;
         }
         for (p in this.prototypes) {
-            exist = p.checkPrototype(proto)
+            exist = p.checkPrototype(args)
         }
     }
     return exists;
