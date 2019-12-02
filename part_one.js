@@ -13,10 +13,7 @@ myObject.create = function (prototypeList) {
 }
 
 myObject.call = function (funcName, args) {
-    console.log("In call function");
-
     if (typeof this[funcName] === "function") {
-        console.log("In if statment");
         return this[funcName](args);
     }
     if (this.prototypes != null) {
@@ -30,20 +27,19 @@ myObject.call = function (funcName, args) {
     return null;
 }
 
-myObject.addPrototype = function(args) {
+myObject.addPrototype = function (args) {
 
-    if(!args.checkProto(this)) {
+    if (!args.checkProto(this)) {
         this.prototypes.push(args);
-    }else {
+    } else {
         throw "Circular referencing detected, prototype not added"
-        console.log("Exists");
     }
 }
 
 myObject.checkProto = function (args) {
     var exists = false;
 
-    if(this.prototypes != null) {
+    if (this.prototypes != null) {
         if (this.prototypes.includes(args)) {
             return true;
         }
@@ -53,35 +49,3 @@ myObject.checkProto = function (args) {
     }
     return exists;
 }
-
-
-//Egna tester
-//var obj0 = myObject.create(null);
-//var obj1 = myObject.create([obj0]);
-//obj0.addPrototype(obj1);
-
-//Kurstester *****************
-var obj0 = myObject.create(null);
-obj0.func = function (arg) {return "func0: " + arg;};
-var obj1 = myObject.create([obj0]);
-var obj2 = myObject.create([]);
-obj2.func = function (arg) {return "func2: " + arg;};
-var obj3 = myObject.create([obj1, obj2]);
-var result = obj3.call("func", ["hello"]);
-console.log("should print ’func0: hello’ ->", result);
-
-
-//Second test
-obj0 = myObject.create(null);
-obj0.func = function (arg) {return "func0: " + arg;};
-obj1 = myObject.create([obj0]);
-obj2 = myObject.create([]);
-obj3 = myObject.create([obj2, obj1]);
-result = obj3.call("test", ["hello"]);
-console.log("should print ’func0: hello’ ->", result);
-
-//Third test
-obj0 = myObject.create(null);
-obj0.func = function (arg) {return "func0: " + arg;};
-result = obj0.call("func", ["hello"]);
-console.log("should print ’func0: hello’ ->", result);
