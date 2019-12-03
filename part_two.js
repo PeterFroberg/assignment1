@@ -13,8 +13,8 @@ function createClass(name, superclassList) {
                     return this[funcName](args);
                 }
                 if (this.superclasses != null) {
-                    for (parent of this.superclasses) {
-                        return parent.__find(funcName)[funcName](args);
+                    for (s of this.superclasses) {
+                        return s.__find(funcName)[funcName](args);
                     }
                 }
                 return null;
@@ -26,8 +26,8 @@ function createClass(name, superclassList) {
                 return this;
             } else {
                 if (this.superclasses != null) {
-                    for (parent of this.superclasses) {
-                        return parent.__find(funcName);
+                    for (s of this.superclasses) {
+                        return s.__find(funcName);
                     }
                 }
             }
@@ -46,8 +46,8 @@ function createClass(name, superclassList) {
                 if (this.superclasses.includes(args)) {
                     return true;
                 }
-                for (p in this.superclasses) {
-                    exist = p.__checkSuperClass(args)
+                for (s in this.superclasses) {
+                    exists = s.__checkSuperClass(args)
                 }
             }
             return exists;
@@ -55,3 +55,4 @@ function createClass(name, superclassList) {
     };
     return obj;
 }
+

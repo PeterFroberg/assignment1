@@ -43,8 +43,8 @@ myObject.checkProto = function (args) {
         if (this.prototypes.includes(args)) {
             return true;
         }
-        for (p in this.prototypes) {
-            exist = p.checkPrototype(args)
+        for (s in this.prototypes) {
+            exists = s.checkPrototype(args)
         }
     }
     return exists;
